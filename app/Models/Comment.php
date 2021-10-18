@@ -4,9 +4,11 @@ namespace App\Models;
 
 use App\Models\User;
 use Database\Factories\CommentFactory;
+use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Carbon;
 
 /**
@@ -27,7 +29,7 @@ use Illuminate\Support\Carbon;
  * @method static Builder|Comment whereId($value)
  * @method static Builder|Comment whereUpdatedAt($value)
  * @method static Builder|Comment whereUserId($value)
- * @mixin \Eloquent
+ * @mixin Eloquent
  */
 class Comment extends Model
 {
@@ -46,7 +48,7 @@ class Comment extends Model
     /**
      * Get the user that wrote the comment.
      */
-    public function user()
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }

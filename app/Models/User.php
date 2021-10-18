@@ -48,6 +48,10 @@ use Illuminate\Support\Carbon;
  * @method static Builder|User whereRememberToken($value)
  * @method static Builder|User whereUpdatedAt($value)
  * @mixin Eloquent
+ * @property-read Collection|\App\Models\Achievement[] $achievements
+ * @property-read int|null $achievements_count
+ * @property-read Collection|\App\Models\Badge[] $badges
+ * @property-read int|null $badges_count
  */
 class User extends Authenticatable
 {
@@ -106,5 +110,22 @@ class User extends Authenticatable
     public function watched(): BelongsToMany
     {
         return $this->belongsToMany(Lesson::class)->wherePivot('watched', true);
+    }
+
+    /**
+     * The achievements a user has gotten.
+     */
+
+    public function achievements(): BelongsToMany
+    {
+        return $this->belongsToMany(Achievement::class);
+    }
+
+    /**
+     * The badges a user has gotten.
+     */
+    public function badges(): BelongsToMany
+    {
+        return $this->belongsToMany(Badge::class);
     }
 }
