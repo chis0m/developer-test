@@ -12,13 +12,14 @@ class LessonWatched
     use Dispatchable;
     use SerializesModels;
 
-    public $lesson;
-    public $user;
+    public Lesson $lesson;
+    public User $user;
 
     /**
      * Create a new event instance.
      *
-     * @return void
+     * @param Lesson $lesson
+     * @param User $user
      */
     public function __construct(Lesson $lesson, User $user)
     {

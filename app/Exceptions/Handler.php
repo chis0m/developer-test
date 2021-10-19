@@ -2,18 +2,20 @@
 
 namespace App\Exceptions;
 
+use App\Traits\TResponder;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
 
 class Handler extends ExceptionHandler
 {
+    use TResponder;
     /**
      * A list of the exception types that are not reported.
      *
      * @var array
      */
     protected $dontReport = [
-        //
+        ApplicationException::class
     ];
 
     /**
@@ -32,10 +34,26 @@ class Handler extends ExceptionHandler
      *
      * @return void
      */
-    public function register()
+    public function register(): void
     {
         $this->reportable(function (Throwable $e) {
             //
         });
+    }
+
+    public function render($request, Throwable $e)
+    {
+        if ($e instanceof ApplicationException) {
+            $code = $e->getCode();
+            $message = $e->getMessage();
+            return $this->error(null, $message, $code);
+        }
+
+        if (env('APP_DEBUG', false)) {
+            return parent::render($request, $e);
+        }
+
+        // @phpstan-ignore-next-line
+        return $this->fatalError($e);
     }
 }

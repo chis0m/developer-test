@@ -4,9 +4,11 @@ namespace App\Models;
 
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Str;
 
 /**
  * App\Models\Achievement
@@ -25,6 +27,10 @@ use Illuminate\Support\Carbon;
  * @method static Builder|Achievement whereUpdatedAt($value)
  * @property string $type
  * @method static Builder|Achievement whereType($value)
+ * @property string $slug
+ * @property int $count
+ * @method static Builder|Achievement whereCount($value)
+ * @method static Builder|Achievement whereSlug($value)
  */
 class Achievement extends Model
 {
@@ -37,6 +43,37 @@ class Achievement extends Model
      */
     protected $fillable = [
         'type',
-        'title'
+        'title',
+        'slug',
+        'count'
     ];
+
+
+    /**
+     * @param $value
+     */
+    public function setTitleAttribute($value): void
+    {
+        $this->attributes['title'] = strtolower($value);
+//        $this->attributes['slug'] = Str::slug(strtolower($value));
+    }
+
+    /**
+     * @param string $title
+     * @return Achievement|Builder|Model|object|null
+     */
+    public static function getAchievement(string $title): Achievement
+    {
+        return self::query()->whereTitle(Str::slug(strtolower($title)))->first();
+    }
+
+    /**
+    /**
+     * @param string $type
+     * @return Achievement[]|Builder[]|Collection
+     */
+    public static function getAchievements(string $type): Collection
+    {
+        return self::query()->whereType(strtolower($type))->get();
+    }
 }

@@ -17,6 +17,8 @@ class CreateAchievementsTable extends Migration
             $table->id();
             $table->string('type');
             $table->string('title');
+//            $table->string('slug');
+            $table->integer('total');
             $table->timestamps();
         });
     }
