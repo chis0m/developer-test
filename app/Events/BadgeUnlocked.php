@@ -2,6 +2,7 @@
 
 namespace App\Events;
 
+use App\Models\Badge;
 use App\Models\User;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
@@ -22,7 +23,7 @@ class BadgeUnlocked
     /**
      * @var string
      */
-    public string $name;
+    public string $badge;
 
     /**
      * @var User
@@ -32,12 +33,12 @@ class BadgeUnlocked
     /**
      * Create a new event instance.
      *
-     * @param string $name
+     * @param Badge $badge
      * @param User $user
      */
-    public function __construct(string $name, User $user)
+    public function __construct(Badge $badge, User $user)
     {
-        $this->name = $name;
+        $this->badge = $badge;
         $this->user = $user;
     }
 }

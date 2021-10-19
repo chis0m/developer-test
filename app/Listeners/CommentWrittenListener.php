@@ -18,7 +18,7 @@ class CommentWrittenListener
      */
     public function handle(CommentWritten $event): void
     {
-        $achievement = new AchievementStrategy(Enum::comment);
+        $achievement = new AchievementStrategy(Enum::COMMENT);
         $achievement->unlockAchievement($event->comment->user);
 
     }

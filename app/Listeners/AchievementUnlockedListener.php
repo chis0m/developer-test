@@ -20,7 +20,6 @@ class AchievementUnlockedListener
     public function handle(AchievementUnlocked $event): void
     {
         $event->user->achievements()->attach($event->achievement);
-
-        $badge = new AchievementStrategy(Enum::LESSON);
+        AchievementStrategy::unlockBadge($event->user);
     }
 }

@@ -2,21 +2,29 @@
 
 namespace App\Services;
 
+use App\Contracts\AbstractAchievement;
 use App\Events\AchievementUnlocked;
-use App\Interfaces\AchievementInterface;
 use App\Models\Achievement;
 use App\Models\User;
 use App\Utilities\Enum;
 
-class CommentService implements AchievementInterface
+/**
+ * Class CommentService
+ * @package App\Services
+ */
+class CommentService extends AbstractAchievement
 {
-    private string $type = Enum::comment;
-
+    /**
+     * @return string
+     */
     public function getType(): string
     {
-        return $this->type;
+        return Enum::COMMENT;
     }
 
+    /**
+     * @param string $title
+     */
     public function createAchievements(string $title): void
     {
         Achievement::create([
@@ -25,22 +33,18 @@ class CommentService implements AchievementInterface
         ]);
     }
 
+    /**
+     * @param User $user
+     */
     public function unlockAchievement(User $user): void
     {
         $totalUserComments = $user->comments->count();
-        $commentAchievements = Achievement::getAchievements($this->type);
+        $commentAchievements = Achievement::getAchievements($this->getType());
         $achievement = $commentAchievements->filter(static function($achievement) use ($totalUserComments){
             return $achievement->{'total'} === $totalUserComments;
         })->first();
         if($achievement) {
             AchievementUnlocked::dispatch($achievement, $user);
         }
-
     }
-
-    public function unlockBadge(User $user): void
-    {
-        // TODO: Implement unlockBadge() method.
-    }
-
 }

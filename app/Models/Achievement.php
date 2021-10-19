@@ -11,7 +11,7 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
 
 /**
- * App\Models\Achievement
+ * App\Models\AbstractAchievement
  *
  * @method static Builder|Achievement newModelQuery()
  * @method static Builder|Achievement newQuery()

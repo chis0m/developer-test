@@ -2,22 +2,25 @@
 
 namespace App\Services;
 
+use App\Contracts\AbstractAchievement;
 use App\Events\AchievementUnlocked;
-use App\Interfaces\AchievementInterface;
 use App\Models\Achievement;
-use App\Models\Lesson;
 use App\Models\User;
 use App\Utilities\Enum;
 
-class LessonService implements AchievementInterface
+class LessonService extends AbstractAchievement
 {
-    private string $type = Enum::LESSON;
-
+    /**
+     * @return string
+     */
     public function getType(): string
     {
-        return $this->type;
+        return Enum::LESSON;
     }
 
+    /**
+     * @param string $title
+     */
     public function createAchievements(string $title): void
     {
         Achievement::create([
@@ -26,9 +29,12 @@ class LessonService implements AchievementInterface
         ]);
     }
 
+    /**
+     * @param User $user
+     */
     public function unlockAchievement(User $user): void
     {
-        $lessonAchievements = Achievement::getAchievements($this->type);
+        $lessonAchievements = Achievement::getAchievements($this->getType());
         $numberOfWatched = $user->watched->count();
         $achievement = $lessonAchievements->filter(static function($achievement) use ($numberOfWatched){
             return $achievement->{'total'} === $numberOfWatched;
@@ -36,10 +42,5 @@ class LessonService implements AchievementInterface
         if($achievement) {
             AchievementUnlocked::dispatch($achievement, $user);
         }
-    }
-
-    public function unlockBadge(User $user): void
-    {
-        // TODO: Implement unlockBadge() method.
     }
 }

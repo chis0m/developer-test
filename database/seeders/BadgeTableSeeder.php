@@ -17,21 +17,25 @@ class BadgeTableSeeder extends Seeder
         $badges = [
             [
                 'title' => 'beginner',
+                'total' => 0,
                 'created_at'=> now(),
                 'updated_at'=> now()
             ],
             [
                 'title' => 'intermediate',
+                'total' => 4,
                 'created_at'=> now(),
                 'updated_at'=> now()
             ],
             [
                 'title' => 'advanced',
+                'total' => 8,
                 'created_at'=> now(),
                 'updated_at'=> now()
             ],
             [
                 'title' => 'master',
+                'total' => 10,
                 'created_at'=> now(),
                 'updated_at'=> now()
             ]

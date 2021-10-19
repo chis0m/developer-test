@@ -3,6 +3,7 @@
 
 namespace App\Services;
 
+use App\Contracts\AbstractAchievement;
 use App\Exceptions\ApplicationException;
 use App\Models\User;
 use App\Utilities\Enum;
@@ -31,7 +32,7 @@ class AchievementStrategy
            case Enum::LESSON:
                $this->setAchievement(new LessonService());
                break;
-           case Enum::comment:
+           case Enum::COMMENT:
                $this->setAchievement(new CommentService());
                break;
            default:
@@ -62,8 +63,8 @@ class AchievementStrategy
     /**
      * @param User $user
      */
-    public function unlockBadge(User $user): void
+    public static function unlockBadge(User $user): void
     {
-        $this->achievement->unlockBadge($user);
+        AbstractAchievement::unlockBadge($user);
     }
 }
