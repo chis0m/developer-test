@@ -64,7 +64,7 @@ class Achievement extends Model
      */
     public static function getAchievement(string $title): ?Achievement
     {
-        return self::query()->whereTitle(Str::slug(strtolower($title)))->first();
+        return self::query()->whereTitle($title)->first();
     }
 
     /**

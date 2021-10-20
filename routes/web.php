@@ -5,7 +5,6 @@ use App\Http\Controllers\LessonAchievementController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AchievementsController;
 
-
 Route::get('/', static function () {
     return [
       'message' => 'Welcome to a high Achievement!',

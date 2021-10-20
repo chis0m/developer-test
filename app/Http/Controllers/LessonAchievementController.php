@@ -15,7 +15,6 @@ use Illuminate\Http\Response;
  */
 class LessonAchievementController extends Controller
 {
-
     use TResponder;
 
     /**

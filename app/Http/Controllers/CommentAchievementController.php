@@ -26,6 +26,6 @@ class CommentAchievementController extends Controller
     {
         $comment = new AchievementStrategy(Enum::COMMENT);
         $achievement = $comment->createAchievement($request['title'], $request['size']);
-        return $this->success($achievement,'Successful', Response::HTTP_CREATED);
+        return $this->success($achievement, 'Successful', Response::HTTP_CREATED);
     }
 }

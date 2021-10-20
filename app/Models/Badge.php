@@ -39,4 +39,9 @@ class Badge extends Model
         'title',
         'size',
     ];
+
+    public static function getBadge(string $title): Badge
+    {
+        return self::query()->whereTitle($title)->first();
+    }
 }

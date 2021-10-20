@@ -23,5 +23,4 @@ class AchievementsController extends Controller
         ];
         return $this->success($achievements);
     }
-
 }

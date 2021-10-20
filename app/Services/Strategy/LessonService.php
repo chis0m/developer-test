@@ -17,7 +17,7 @@ class LessonService extends AbstractAchievement
 
     public function createAchievements(string $title, int $size): Achievement
     {
-       return Achievement::create([
+        return Achievement::create([
             'type' => $this->getType(),
             'title' => $title,
             'size' => $size
@@ -27,9 +27,9 @@ class LessonService extends AbstractAchievement
     public function unlockAchievement(User $user): void
     {
         $lessonAchievements = Achievement::getAchievements($this->getType());
-        $numberOfWatched = $user->watched->count();
-        $achievement = $lessonAchievements->filter(static function ($achievement) use ($numberOfWatched) {
-            return $achievement->{'size'} === $numberOfWatched;
+        $numberOfWatchedLessons = $user->watched->count();
+        $achievement = $lessonAchievements->filter(static function ($achievement) use ($numberOfWatchedLessons) {
+            return $achievement->{'size'} === $numberOfWatchedLessons;
         })->first();
         if ($achievement) {
             AchievementUnlocked::dispatch($achievement, $user);

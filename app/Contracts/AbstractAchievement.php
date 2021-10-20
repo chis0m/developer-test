@@ -18,15 +18,14 @@ abstract class AbstractAchievement
 
     public static function unlockBadge(User $user): void
     {
-        $totalUsersAchievements = $user->achievements->count();
+        $usersAchievements = $user->achievements()->get();
+        $totalUsersAchievements = $usersAchievements->count();
         $allBadges = Badge::all();
-
         $newBadge = $allBadges->filter(static function ($badge) use ($totalUsersAchievements) {
             return $badge->{'size'} === $totalUsersAchievements;
         })->first();
-
         if ($newBadge) {
-            BadgeUnlocked::dispatch($user, $newBadge);
+            BadgeUnlocked::dispatch($newBadge, $user);
         } else {
             $badge = Badge::whereTitle(Enum::BEGINNER)->firstOrFail();
             $user->badges()->syncWithoutDetaching([$badge->id]);

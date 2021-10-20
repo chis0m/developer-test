@@ -51,5 +51,4 @@ class AchievementTest extends TestCase
             ]
         ]);
     }
-
 }
