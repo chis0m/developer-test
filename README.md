@@ -24,7 +24,7 @@
   
   cp .env.example .env
 
-  cd note-taker
+  cd developer-test
 
   ./sail down --rmi all -v || true #Optional - This will remove images that may interfere with the installation
   
