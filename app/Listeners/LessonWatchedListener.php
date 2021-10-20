@@ -11,6 +11,16 @@ use Illuminate\Queue\InteractsWithQueue;
 class LessonWatchedListener
 {
     /**
+     * Create the event listener.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        //
+    }
+
+    /**
      * Handle the event.
      *
      * @param  LessonWatched  $event
@@ -18,7 +28,7 @@ class LessonWatchedListener
      */
     public function handle(LessonWatched $event): void
     {
-        $event->user->lessons()->attach($event->lesson, ['watched' => true]);
+        $event->user->lessons()->syncWithoutDetaching([$event->lesson->id => ['watched' => true]]);
         $achievement = new AchievementStrategy(Enum::LESSON);
         $achievement->unlockAchievement($event->user);
     }

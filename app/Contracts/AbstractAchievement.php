@@ -3,6 +3,7 @@
 namespace App\Contracts;
 
 use App\Events\BadgeUnlocked;
+use App\Models\Achievement;
 use App\Models\Badge;
 use App\Models\User;
 use App\Utilities\Enum;
@@ -11,7 +12,7 @@ abstract class AbstractAchievement
 {
     abstract public function getType(): string;
 
-    abstract public function createAchievements(string $title): void;
+    abstract public function createAchievements(string $title, int $size): Achievement;
 
     abstract public function unlockAchievement(User $user): void;
 

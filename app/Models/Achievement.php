@@ -46,8 +46,7 @@ class Achievement extends Model
     protected $fillable = [
         'type',
         'title',
-        'slug',
-        'count'
+        'size'
     ];
 
 

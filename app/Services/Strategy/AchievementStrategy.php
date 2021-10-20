@@ -4,6 +4,7 @@ namespace App\Services\Strategy;
 
 use App\Contracts\AbstractAchievement;
 use App\Exceptions\ApplicationException;
+use App\Models\Achievement;
 use App\Models\User;
 use App\Utilities\Enum;
 use Illuminate\Http\Response;
@@ -48,6 +49,16 @@ class AchievementStrategy
     private function setAchievement($achievement): void
     {
         $this->achievement = $achievement;
+    }
+
+    /**
+     * @param string $title
+     * @param int $size
+     * @return Achievement
+     */
+    public function createAchievement(string $title, int $size): Achievement
+    {
+        return $this->achievement->createAchievements($title, $size);
     }
 
     /**

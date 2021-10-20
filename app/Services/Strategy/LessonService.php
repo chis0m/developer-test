@@ -15,11 +15,12 @@ class LessonService extends AbstractAchievement
         return Enum::LESSON;
     }
 
-    public function createAchievements(string $title): void
+    public function createAchievements(string $title, int $size): Achievement
     {
-        Achievement::create([
+       return Achievement::create([
             'type' => $this->getType(),
             'title' => $title,
+            'size' => $size
         ]);
     }
 

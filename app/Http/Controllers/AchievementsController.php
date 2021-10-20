@@ -10,14 +10,18 @@ use Illuminate\Http\Request;
 
 class AchievementsController extends Controller
 {
+    use TResponder;
+
     public function index(User $user): JsonResponse
     {
-        return response()->json([
+        $achievements = [
             'unlocked_achievements' => AchievementService::getUnlockedAchievements($user),
             'next_available_achievements' => AchievementService::getNextAvailableAchievements($user),
             'current_badge' => AchievementService::getCurrentBadge($user),
             'next_badge' => AchievementService::getNextBadge($user),
             'remaining_to_unlock_next_badge' => AchievementService::getRemainingToUnlockNextBadge($user)
-        ]);
+        ];
+        return $this->success($achievements);
     }
+
 }

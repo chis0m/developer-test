@@ -17,7 +17,6 @@ class CreateBadgeUserTable extends Migration
             $table->id();
             $table->foreignId('badge_id')->constrained();
             $table->foreignId('user_id')->constrained();
-            $table->timestamps();
         });
     }
 

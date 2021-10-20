@@ -24,12 +24,15 @@ class CommentService extends AbstractAchievement
 
     /**
      * @param string $title
+     * @param int $size
+     * @return Achievement
      */
-    public function createAchievements(string $title): void
+    public function createAchievements(string $title, int $size): Achievement
     {
-        Achievement::create([
+       return Achievement::create([
             'type' => $this->getType(),
-            'title' => $title
+            'title' => $title,
+           'size' => $size
         ]);
     }
 

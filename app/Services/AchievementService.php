@@ -50,9 +50,9 @@ class AchievementService
 
     /**
      * @param User $user
-     * @return Badge
+     * @return null|Badge
      */
-    public static function currentBadge(User $user): Badge
+    public static function currentBadge(User $user): ?Badge
     {
         return  $user->badgesBySize->last();
     }
@@ -69,9 +69,9 @@ class AchievementService
 
     /**
      * @param User $user
-     * @return Badge
+     * @return null|Badge
      */
-    public static function nextBadge(User $user): Badge
+    public static function nextBadge(User $user): ?Badge
     {
         $badges = Badge::orderBy(Enum::SIZE)->get();
         $userBadges = $user->badgesBySize;

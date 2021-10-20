@@ -10,6 +10,16 @@ use Illuminate\Queue\InteractsWithQueue;
 class AchievementUnlockedListener
 {
     /**
+     * Create the event listener.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        //
+    }
+
+    /**
      * Handle the event.
      *
      * @param  AchievementUnlocked  $event
