@@ -3,18 +3,21 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Services\AchievementService;
+use App\Traits\TResponder;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class AchievementsController extends Controller
 {
-    public function index(User $user)
+    public function index(User $user): JsonResponse
     {
         return response()->json([
-            'unlocked_achievements' => [],
-            'next_available_achievements' => [],
-            'current_badge' => '',
-            'next_badge' => '',
-            'remaing_to_unlock_next_badge' => 0
+            'unlocked_achievements' => AchievementService::getUnlockedAchievements($user),
+            'next_available_achievements' => AchievementService::getNextAvailableAchievements($user),
+            'current_badge' => AchievementService::getCurrentBadge($user),
+            'next_badge' => AchievementService::getNextBadge($user),
+            'remaining_to_unlock_next_badge' => AchievementService::getRemainingToUnlockNextBadge($user)
         ]);
     }
 }

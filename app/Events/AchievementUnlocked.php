@@ -14,7 +14,9 @@ use Illuminate\Queue\SerializesModels;
 
 class AchievementUnlocked
 {
-    use Dispatchable, InteractsWithSockets, SerializesModels;
+    use Dispatchable;
+    use InteractsWithSockets;
+    use SerializesModels;
 
     /**
      * @var Achievement
@@ -36,5 +38,4 @@ class AchievementUnlocked
         $this->achievement = $achievement;
         $this->user = $user;
     }
-
 }

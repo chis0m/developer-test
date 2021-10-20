@@ -18,12 +18,14 @@ use Illuminate\Queue\SerializesModels;
  */
 class BadgeUnlocked
 {
-    use Dispatchable, InteractsWithSockets, SerializesModels;
+    use Dispatchable;
+    use InteractsWithSockets;
+    use SerializesModels;
 
     /**
-     * @var string
+     * @var Badge
      */
-    public string $badge;
+    public Badge $badge;
 
     /**
      * @var User

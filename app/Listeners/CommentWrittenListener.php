@@ -3,7 +3,7 @@
 namespace App\Listeners;
 
 use App\Events\CommentWritten;
-use App\Services\AchievementStrategy;
+use App\Services\Strategy\AchievementStrategy;
 use App\Utilities\Enum;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
@@ -20,6 +20,5 @@ class CommentWrittenListener
     {
         $achievement = new AchievementStrategy(Enum::COMMENT);
         $achievement->unlockAchievement($event->comment->user);
-
     }
 }

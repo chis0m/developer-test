@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services;
+namespace App\Services\Strategy;
 
 use App\Contracts\AbstractAchievement;
 use App\Events\AchievementUnlocked;
@@ -8,14 +8,18 @@ use App\Models\Achievement;
 use App\Models\User;
 use App\Utilities\Enum;
 
-class LessonService extends AbstractAchievement
+/**
+ * Class CommentService
+ * @package App\Services
+ */
+class CommentService extends AbstractAchievement
 {
     /**
      * @return string
      */
     public function getType(): string
     {
-        return Enum::LESSON;
+        return Enum::COMMENT;
     }
 
     /**
@@ -34,12 +38,12 @@ class LessonService extends AbstractAchievement
      */
     public function unlockAchievement(User $user): void
     {
-        $lessonAchievements = Achievement::getAchievements($this->getType());
-        $numberOfWatched = $user->watched->count();
-        $achievement = $lessonAchievements->filter(static function($achievement) use ($numberOfWatched){
-            return $achievement->{'total'} === $numberOfWatched;
+        $totalUserComments = $user->comments->count();
+        $commentAchievements = Achievement::getAchievements($this->getType());
+        $achievement = $commentAchievements->filter(static function ($achievement) use ($totalUserComments) {
+            return $achievement->{'size'} === $totalUserComments;
         })->first();
-        if($achievement) {
+        if ($achievement) {
             AchievementUnlocked::dispatch($achievement, $user);
         }
     }

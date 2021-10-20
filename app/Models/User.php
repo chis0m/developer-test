@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Comment;
+use App\Utilities\Enum;
 use Database\Factories\UserFactory;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
@@ -48,10 +49,14 @@ use Illuminate\Support\Carbon;
  * @method static Builder|User whereRememberToken($value)
  * @method static Builder|User whereUpdatedAt($value)
  * @mixin Eloquent
- * @property-read Collection|\App\Models\Achievement[] $achievements
+ * @property-read Collection|Achievement[] $achievements
  * @property-read int|null $achievements_count
- * @property-read Collection|\App\Models\Badge[] $badges
+ * @property-read Collection|Badge[] $badges
  * @property-read int|null $badges_count
+ * @property-read Collection|Badge[] $badgesBySize
+ * @property-read int|null $badges_by_size_count
+ * @property-read Collection|Achievement[] $achievementsBySize
+ * @property-read int|null $achievements_by_size_count
  */
 class User extends Authenticatable
 {
@@ -122,10 +127,42 @@ class User extends Authenticatable
     }
 
     /**
+     * @return BelongsToMany
+     */
+    public function achievementsBySize(): BelongsToMany
+    {
+        return $this->achievements()->orderBy(Enum::SIZE);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function lessonAchievements()
+    {
+        return $this->achievementsBySize()->whereType(Enum::LESSON);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function commentAchievements()
+    {
+        return $this->achievementsBySize()->whereType(Enum::COMMENT);
+    }
+
+    /**
      * The badges a user has gotten.
      */
     public function badges(): BelongsToMany
     {
         return $this->belongsToMany(Badge::class);
+    }
+
+    /**
+     * @return BelongsToMany
+     */
+    public function badgesBySize(): BelongsToMany
+    {
+        return $this->badges()->orderBy('size');
     }
 }

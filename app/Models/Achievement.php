@@ -31,6 +31,8 @@ use Illuminate\Support\Str;
  * @property int $count
  * @method static Builder|Achievement whereCount($value)
  * @method static Builder|Achievement whereSlug($value)
+ * @property int $size
+ * @method static Builder|Achievement whereSize($value)
  */
 class Achievement extends Model
 {
@@ -50,29 +52,27 @@ class Achievement extends Model
 
 
     /**
-     * @param $value
+     * @param string $value
      */
-    public function setTitleAttribute($value): void
+    public function setTitleAttribute(string $value): void
     {
         $this->attributes['title'] = strtolower($value);
-//        $this->attributes['slug'] = Str::slug(strtolower($value));
     }
 
     /**
      * @param string $title
-     * @return Achievement|Builder|Model|object|null
+     * @return Achievement|null
      */
-    public static function getAchievement(string $title): Achievement
+    public static function getAchievement(string $title): ?Achievement
     {
         return self::query()->whereTitle(Str::slug(strtolower($title)))->first();
     }
 
     /**
-    /**
      * @param string $type
-     * @return Achievement[]|Builder[]|Collection
+     * @return Achievement[]|Collection
      */
-    public static function getAchievements(string $type): Collection
+    public static function getAchievements(string $type)
     {
         return self::query()->whereType(strtolower($type))->get();
     }

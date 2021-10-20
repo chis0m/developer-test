@@ -17,13 +17,6 @@ class BadgeUnlockedListener
      */
     public function handle(BadgeUnlocked $event): void
     {
-        $badge = $event->badge;
-        $user = $event->user;
-        if(!$badge) {
-            $badge = Badge::whereTitle(Badge::BEGINNER)->firstOrFail();
-            $user->badges()->syncWithoutDetaching([$badge->id]);
-        } else {
-            $event->user->badges()->syncWithoutDetaching([$badge->id]);
-        }
+        $event->user->badges()->syncWithoutDetaching([$event->badge->id]);
     }
 }

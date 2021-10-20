@@ -1,11 +1,11 @@
 <?php
 
-
 namespace App\Contracts;
 
 use App\Events\BadgeUnlocked;
 use App\Models\Badge;
 use App\Models\User;
+use App\Utilities\Enum;
 
 abstract class AbstractAchievement
 {
@@ -19,9 +19,16 @@ abstract class AbstractAchievement
     {
         $totalUsersAchievements = $user->achievements->count();
         $allBadges = Badge::all();
-        $newBadge = $allBadges->filter(static function($badge) use($totalUsersAchievements) {
-            return $badge->{'total'} === $totalUsersAchievements;
-        });
-        BadgeUnlocked::dispatch($user, $newBadge);
+
+        $newBadge = $allBadges->filter(static function ($badge) use ($totalUsersAchievements) {
+            return $badge->{'size'} === $totalUsersAchievements;
+        })->first();
+
+        if ($newBadge) {
+            BadgeUnlocked::dispatch($user, $newBadge);
+        } else {
+            $badge = Badge::whereTitle(Enum::BEGINNER)->firstOrFail();
+            $user->badges()->syncWithoutDetaching([$badge->id]);
+        }
     }
 }

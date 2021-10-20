@@ -18,7 +18,7 @@ class CreateAchievementsTable extends Migration
             $table->string('type');
             $table->string('title');
 //            $table->string('slug');
-            $table->integer('total');
+            $table->integer('size');
             $table->timestamps();
         });
     }
@@ -28,7 +28,7 @@ class CreateAchievementsTable extends Migration
      *
      * @return void
      */
-    public function down()
+    public function down(): void
     {
         Schema::dropIfExists('achievements');
     }

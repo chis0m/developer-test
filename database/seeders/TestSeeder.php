@@ -22,8 +22,9 @@ class TestSeeder extends Seeder
             $user->lessons()->attach(random_int(1, 20), ['watched' => true]);
             $user->lessons()->attach(random_int(1, 20), ['watched' => true]);
         });
-
         Comment::factory()->count(3)->create(['user_id' => 1]);
         Comment::factory()->count(3)->create(['user_id' => 2]);
+        $users->first()->achievements()->syncWithoutDetaching([1,2,3,6,7]);
+        $users->first()->badges()->syncWithoutDetaching([1,2,3]);
     }
 }

@@ -1,7 +1,6 @@
 <?php
 
-
-namespace App\Services;
+namespace App\Services\Strategy;
 
 use App\Contracts\AbstractAchievement;
 use App\Exceptions\ApplicationException;
@@ -28,20 +27,19 @@ class AchievementStrategy
      */
     public function __construct(string $achievementType)
     {
-       switch ($achievementType) {
-           case Enum::LESSON:
-               $this->setAchievement(new LessonService());
-               break;
-           case Enum::COMMENT:
-               $this->setAchievement(new CommentService());
-               break;
-           default:
-               throw new ApplicationException(
-                   Lang::get('exception.achievement.invalid_type'),
-                   Response::HTTP_PRECONDITION_FAILED
-               );
-       }
-
+        switch ($achievementType) {
+            case Enum::LESSON:
+                $this->setAchievement(new LessonService());
+                break;
+            case Enum::COMMENT:
+                $this->setAchievement(new CommentService());
+                break;
+            default:
+                throw new ApplicationException(
+                    Lang::get('exception.achievement.invalid_type'),
+                    Response::HTTP_PRECONDITION_FAILED
+                );
+        }
     }
 
     /**

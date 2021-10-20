@@ -20,7 +20,7 @@ class AchievementTableSeeder extends Seeder
                 'type' => 'lesson',
                 'title' => 'first lesson watched',
 //                'slug' => Str::slug('first lesson watched'),
-                'total' => 1,
+                'size' => 1,
                 'created_at'=> now(),
                 'updated_at'=> now()
                 ],
@@ -28,7 +28,7 @@ class AchievementTableSeeder extends Seeder
                 'type' => 'lesson',
                 'title' => '5 lessons watched',
 //                'slug' => Str::slug('5 lessons watched'),
-                'total' => 5,
+                'size' => 5,
                 'created_at'=> now(),
                 'updated_at'=> now()
                 ],
@@ -36,7 +36,7 @@ class AchievementTableSeeder extends Seeder
                 'type' => 'lesson',
                 'title' => '10 lesson watched',
 //                'slug' => Str::slug('10 lesson watched'),
-                'total' => 10,
+                'size' => 10,
                 'created_at'=> now(),
                 'updated_at'=> now()
                 ],
@@ -44,7 +44,7 @@ class AchievementTableSeeder extends Seeder
                 'type' => 'lesson',
                 'title' => '25 lesson watched',
 //                'slug' => Str::slug('25 lesson watched'),
-                'total' => 25,
+                'size' => 25,
                 'created_at'=> now(),
                 'updated_at'=> now()
                 ],
@@ -52,7 +52,7 @@ class AchievementTableSeeder extends Seeder
                 'type' => 'lesson',
                 'title' => '50 lesson watched',
 //                'slug' => Str::slug('50 lesson watched'),
-                'total' => 50,
+                'size' => 50,
                 'created_at'=> now(),
                 'updated_at'=> now()
                 ],
@@ -60,35 +60,35 @@ class AchievementTableSeeder extends Seeder
                 'type' => 'comment',
                 'title' => 'first comment written',
 //                'slug' => Str::slug('first comment written'),
-                'total' => 1,
+                'size' => 1,
                 'created_at'=> now(),
                 'updated_at'=> now()
             ],            [
                 'type' => 'comment',
                 'title' => '3 comments written',
 //                'slug' => Str::slug('3 comments written'),
-                'total' => 3,
+                'size' => 3,
                 'created_at'=> now(),
                 'updated_at'=> now()
             ],            [
                 'type' => 'comment',
                 'title' => '5 comments written',
 //                'slug' => Str::slug('5 comments written'),
-                'total' => 5,
+                'size' => 5,
                 'created_at'=> now(),
                 'updated_at'=> now()
                 ],            [
                 'type' => 'comment',
                 'title' => '10 comments written',
 //                'slug' => Str::slug('10 comments written'),
-                'total' => 10,
+                'size' => 10,
                 'created_at'=> now(),
                 'updated_at'=> now()
             ],            [
                 'type' => 'comment',
                 'title' => '20 comments written',
 //                'slug' => Str::slug('20 comments written'),
-                'total' => 20,
+                'size' => 20,
                 'created_at'=> now(),
                 'updated_at'=> now()
             ],

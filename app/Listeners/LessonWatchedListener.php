@@ -3,8 +3,7 @@
 namespace App\Listeners;
 
 use App\Events\LessonWatched;
-use App\Services\AchievementStrategy;
-use App\Services\LessonService;
+use App\Services\Strategy\AchievementStrategy;
 use App\Utilities\Enum;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;

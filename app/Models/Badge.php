@@ -9,26 +9,26 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
 
 /**
- * App\Models\Badge
+ * App\Models\Badge.
  *
  * @method static Builder|Badge newModelQuery()
  * @method static Builder|Badge newQuery()
  * @method static Builder|Badge query()
  * @mixin Eloquent
- * @property int $id
- * @property string $title
- * @property Carbon|null $created_at
- * @property Carbon|null $updated_at
+ * @property int         $id
+ * @property string      $title
+ * @property null|Carbon $created_at
+ * @property null|Carbon $updated_at
  * @method static Builder|Badge whereCreatedAt($value)
  * @method static Builder|Badge whereId($value)
  * @method static Builder|Badge whereTitle($value)
  * @method static Builder|Badge whereUpdatedAt($value)
+ * @property int $size
+ * @method static Builder|Badge whereSize($value)
  */
 class Badge extends Model
 {
     use HasFactory;
-
-    public const BEGINNER = 'beginner';
 
     /**
      * The attributes that are mass assignable.
@@ -37,6 +37,6 @@ class Badge extends Model
      */
     protected $fillable = [
         'title',
-        'total'
+        'size',
     ];
 }

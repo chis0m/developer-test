@@ -3,9 +3,7 @@
 namespace App\Listeners;
 
 use App\Events\AchievementUnlocked;
-use App\Models\Achievement;
-use App\Services\AchievementStrategy;
-use App\Utilities\Enum;
+use App\Services\Strategy\AchievementStrategy;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 
@@ -19,7 +17,7 @@ class AchievementUnlockedListener
      */
     public function handle(AchievementUnlocked $event): void
     {
-        $event->user->achievements()->attach($event->achievement);
+        $event->user->achievements()->syncWithoutDetaching([$event->achievement->id]);
         AchievementStrategy::unlockBadge($event->user);
     }
 }
